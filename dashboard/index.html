@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Token Launch Radar</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="top">
+  <div class="title-block">
+    <h1>Token Launch Radar</h1>
+    <p id="subtitle" class="subtitle"></p>
+  </div>
+  <div id="summary" class="summary"></div>
+</header>
+
+<nav class="tabs" aria-label="Views">
+  <button id="tab-board" class="tab active" type="button">Pre-token board</button>
+  <button id="tab-live" class="tab" type="button">Live tokens</button>
+</nav>
+
+<section id="board-view">
+  <div class="controls">
+    <label>Search <input id="q" type="search" placeholder="Name or slug" autocomplete="off"></label>
+    <label>Category <select id="category"><option value="">All categories</option></select></label>
+    <label>Chain <select id="chain"><option value="">All chains</option></select></label>
+    <label>Min TVL
+      <select id="min-tvl">
+        <option value="0">Any</option>
+        <option value="10000000">$10M</option>
+        <option value="50000000">$50M</option>
+        <option value="100000000">$100M</option>
+        <option value="500000000">$500M</option>
+        <option value="1000000000">$1B</option>
+      </select>
+    </label>
+    <label class="check"><input id="watchlist-only" type="checkbox"> Watchlist only</label>
+  </div>
+  <p id="count" class="count"></p>
+  <div class="table-wrap">
+    <table id="board">
+      <thead><tr id="board-head"></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</section>
+
+<section id="live-view" hidden>
+  <p class="note">These protocols already have a token trading. They are shown for comparison only and are not ranked on the board.</p>
+  <div class="table-wrap">
+    <table id="live">
+      <thead><tr id="live-head"></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</section>
+
+<section id="how" class="how">
+  <h2>How the model works</h2>
+  <p id="formula" class="formula"></p>
+  <p class="honest">Every protocol on the board records no token in the snapshot. That is what the record says, not proof that no token exists: a protocol may have a token its DefiLlama record does not carry. The implied value is this entry's own claim, never a market price.</p>
+  <h3>Category multiples</h3>
+  <p class="muted">Median market-cap / TVL of the live-token protocols in each category (at least 3 needed, otherwise the global median). Clamped to 0.05x &ndash; 2.5x.</p>
+  <table id="multiples" class="small">
+    <thead><tr><th>Category</th><th>Live protocols</th><th>Median multiple</th></tr></thead>
+    <tbody></tbody>
+  </table>
+</section>
+
+<dialog class="detail" id="detail">
+  <form method="dialog"><button class="close" aria-label="Close">Close</button></form>
+  <div id="detail-body"></div>
+</dialog>
+
+<script src="../data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
